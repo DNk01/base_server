@@ -9,7 +9,7 @@ import (
 func GETHandler(w http.ResponseWriter, r *http.Request) {
 	db := OpenConnection()
 
-	rows, err := db.Query("SELECT * FROM user")
+	rows, err := db.Query("SELECT * FROM person")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -41,7 +41,7 @@ func POSTHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	sqlStatement := `INSERT INTO user (name) VALUES ($1)`
+	sqlStatement := `INSERT INTO person (name) VALUES ($1)`
 	_, err = db.Exec(sqlStatement, p.FullName)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
